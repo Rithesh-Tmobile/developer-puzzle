@@ -20,7 +20,7 @@ export class PriceQueryFetchError implements Action {
 
 export class PriceQueryFetched implements Action {
   readonly type = PriceQueryActionTypes.PriceQueryFetched;
-  constructor(public queryResults: PriceQueryResponse[], public startDate: string, public endDate: string) {}
+  constructor(public queryResults: PriceQueryResponse[]) {}
 }
 
 export class SelectSymbol implements Action {

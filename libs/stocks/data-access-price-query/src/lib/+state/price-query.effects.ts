@@ -24,14 +24,15 @@ export class PriceQueryEffects {
       run: (action: FetchPriceQuery, state: PriceQueryPartialState) => {
         return this.httpClient
           .get(
-            `${this.env.apiURL}/beta/stock/${action.symbol}/chart/max?token=${this.env.apiKey}`
+            `${this.env.apiURL}/stocks/v1/details/${action.symbol}?startDate=${action.startDate}&endDate=${action.endDate}`
           )
           .pipe(
-            map(resp => new PriceQueryFetched(resp as PriceQueryResponse[], action.startDate, action.endDate))
+            map(resp => new PriceQueryFetched(resp as PriceQueryResponse[]))
           );
       },
 
       onError: (action: FetchPriceQuery, error) => {
+        console.log("Error occurred while calling api");
         return new PriceQueryFetchError(error);
       }
     }
