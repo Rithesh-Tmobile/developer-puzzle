@@ -69,9 +69,16 @@ describe('StocksComponent', () => {
 
   describe('fetchQuoteEvent()', () => {    
     it('should fetch stock details', () => {  
-      component.stockPickerForm.setValue({symbol: "AAL", period: "3m"});   
+      component.stockPickerForm.setValue({symbol: "AAL", startDate: "2020-01-03", endDate: "2020-01-15"});   
       component.fetchQuote();
       expect(component.quotes$).toBeTruthy();
+    });
+  });
+  describe('handleDateChangeEvent()', () => {    
+    it('should set minToDate', () => {
+      const event = {value: "2020-01-03"};  
+      component.handleDateChange(event);
+      expect(component.datePicker.minToDate).toBe(event.value);
     });
   });
 });

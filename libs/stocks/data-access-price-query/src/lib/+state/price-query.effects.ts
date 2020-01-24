@@ -24,12 +24,10 @@ export class PriceQueryEffects {
       run: (action: FetchPriceQuery, state: PriceQueryPartialState) => {
         return this.httpClient
           .get(
-            `${this.env.apiURL}/beta/stock/${action.symbol}/chart/${
-              action.period
-            }?token=${this.env.apiKey}`
+            `${this.env.apiURL}/beta/stock/${action.symbol}/chart/max?token=${this.env.apiKey}`
           )
           .pipe(
-            map(resp => new PriceQueryFetched(resp as PriceQueryResponse[]))
+            map(resp => new PriceQueryFetched(resp as PriceQueryResponse[], action.startDate, action.endDate))
           );
       },
 

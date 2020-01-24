@@ -16,20 +16,69 @@
       >
     </mat-error>
   </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Favorite time period</mat-label>
-    <mat-select formControlName="period">
-      <mat-option
-        *ngFor="let timePeriod of timePeriods"
-        [value]="timePeriod.value"
+  
+    <mat-form-field>
+      <input
+        matInput
+        [matDatepicker]="startDate"
+        placeholder="Start date"
+        [min]=""
+        [max]="datePicker.maxDate"
+        name="startDate"
+        formControlName="startDate"
+        (dateChange)="handleDateChange($event)"
+        required
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="startDate"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #startDate></mat-datepicker>
+      <mat-error
+      ><span
+        *ngIf="
+          !stockPickerForm.get('startDate').valid &&
+          stockPickerForm.get('startDate').touched
+        "
+        >Please enter a valid start date</span
       >
-        {{ timePeriod.viewValue }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    </mat-error>
+    </mat-form-field>
 
-  <button (click)="fetchQuote()" mat-raised-button>Go</button>
+    <mat-form-field>
+      <input
+        matInput
+        [matDatepicker]="endDate"
+        placeholder="End date"
+        [min]="datePicker.minToDate"
+        [max]="datePicker.maxDate"
+        name="endDate"
+        formControlName="endDate"
+        required
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="endDate"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #endDate></mat-datepicker>
+      <mat-error
+      ><span
+        *ngIf="
+          !stockPickerForm.get('endDate').valid &&
+          stockPickerForm.get('endDate').touched
+        "
+        >Please enter a valid end date</span
+      >
+      </mat-error>
+    </mat-form-field>
+    
+
+  <button (click)="fetchQuote()" [disabled]="!(stockPickerForm.get('symbol').valid 
+  && stockPickerForm.get('startDate').valid
+  && stockPickerForm.get('endDate').valid
+  && stockPickerForm.get('endDate').touched
+)" 
+    mat-raised-button>Show Details</button>
 </form>
-
+<!-- <div> Oops!</div> -->
 <coding-challenge-chart [data$]="quotes$"></coding-challenge-chart>
