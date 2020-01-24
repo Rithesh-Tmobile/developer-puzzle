@@ -43,8 +43,22 @@ A proxy has been set up in `stocks` to proxy calls to `locahost:3333` which is t
 Please provide a short code review of the base `master` branch:
 
 1. What is done well?
+
+    a. state management with NGRX
+    b. HapiJS implementation for handling server side logic.
+    c. Well defined code structure (NGRX reducers, effects, selectors)
+ 
 2. What would you change?
+
+    a. Chart was not loading due to wrong condition check. This is fixed.
+    b. Testcase failures fixed.
+    c. Test coverage improved.
+
 3. Are there any code smells or problematic implementations?
+
+    a. Chart was not loading due to wrong condition check
+    b. Testcase failures
+    c. Exception handling not done
 
 > Make a PR to fix at least one of the issues that you identify
 
