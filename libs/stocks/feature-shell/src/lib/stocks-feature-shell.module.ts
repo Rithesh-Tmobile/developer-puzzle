@@ -4,6 +4,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
   MatButtonModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
@@ -21,6 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatButtonModule,
     SharedUiChartModule
   ],

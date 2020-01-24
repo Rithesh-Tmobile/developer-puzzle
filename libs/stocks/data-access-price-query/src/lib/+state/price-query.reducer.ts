@@ -1,7 +1,7 @@
 import { PriceQueryAction, PriceQueryActionTypes } from './price-query.actions';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { PriceQuery } from './price-query.type';
-import { transformPriceQueryResponse } from './price-query-transformer.util';
+import { transformPriceQueryResponse, handleErrors } from './price-query-transformer.util';
 
 export const PRICEQUERY_FEATURE_KEY = 'priceQuery';
 
@@ -44,6 +44,9 @@ export function priceQueryReducer(
         ...state,
         selectedSymbol: action.symbol
       };
+    }
+    case PriceQueryActionTypes.PriceQueryFetchError: {
+      handleErrors(action.error);
     }
   }
   return state;

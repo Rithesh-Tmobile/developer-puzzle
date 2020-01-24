@@ -1,10 +1,11 @@
-import { PriceQueryResponse, PriceQuery } from './price-query.type';
+import { PriceQueryResponse, PriceQuery} from './price-query.type';
 import { map, pick } from 'lodash-es';
 import { parse } from 'date-fns';
 
 export function transformPriceQueryResponse(
   response: PriceQueryResponse[]
 ): PriceQuery[] {
+   
   return map(
     response,
     responseItem =>
@@ -25,3 +26,8 @@ export function transformPriceQueryResponse(
       } as PriceQuery)
   );
 }
+
+export function handleErrors(error): PriceQuery[] {
+  return ([]);
+}
+
