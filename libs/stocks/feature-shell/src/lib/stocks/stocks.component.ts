@@ -16,6 +16,7 @@ export class StocksComponent implements OnInit {
   quotes$ = this.priceQuery.priceQueries$;
 
   timePeriods = stockTimePeriods;
+  valueChanges: any;
   
   constructor(private fb: FormBuilder, private priceQuery: PriceQueryFacade) {
     this.stockPickerForm = fb.group({
@@ -25,11 +26,19 @@ export class StocksComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.stockPickerForm.valueChanges.subscribe(this.fetchQuote);
+    this.valueChanges = this.stockPickerForm.valueChanges.subscribe(val => {
+      this.fetchQuote();
+    });
+  }
+
+  ngOnDestroy() {
+    this.valueChanges.unsubscribe();
   }
 
   fetchQuote() {
+    console.log("inside fetchQuote()..."+this.stockPickerForm.valid);
     if (this.stockPickerForm.valid) {
+      console.log("im inside..");
       const { symbol, period } = this.stockPickerForm.value;
       this.priceQuery.fetchQuote(symbol, period);
     }
